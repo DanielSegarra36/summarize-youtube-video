@@ -1,0 +1,5 @@
+# Ignore files starting with 'transcript'
+transcript*
+
+# Ignore files starting with 'response'
+response*
