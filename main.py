@@ -29,10 +29,10 @@ def summarize_text(text):
             model="gpt-3.5-turbo-1106",
             # api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
             messages=[
-              {"role": "system", "content": "You summarize YouTube videos solely on the video's transcript. highlight core concepts and key points."},
+              {"role": "system", "content": "You summarize YouTube videos solely on the video's transcript. Explain and highlight core concepts and key points in great detail."},
               {"role": "user", "content": text}
             ],
-            max_tokens=150  # Adjust the length of the summary as needed
+            # max_tokens=150  # Adjust the length of the summary as needed
         )
         return response.choices[0].message.content
     except Exception as e:
@@ -40,16 +40,16 @@ def summarize_text(text):
         return None
 
 # Replace 'VIDEO_ID' with the ID of the YouTube video you want to extract the transcript from
-video_id = 'gntyAFoZp-E'
+video_id = 'p02AIAoImzU'
 transcript = get_transcript(video_id)
 
 if transcript:
     current_datetime = datetime.now()
-    save_to_file(transcript, f"transcript{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}.txt")  # Save transcript to a file
+    save_to_file(transcript, f"transcript-{video_id}-{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}.txt")  # Save transcript to a file
 
     summarized_text = summarize_text(transcript)
     if summarized_text:
         print("Summarized Text:")
         print(summarized_text)
         current_datetime = datetime.now()
-        save_to_file(summarized_text, f"response{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}.txt")  # Save transcript to a file
+        save_to_file(summarized_text, f"response-{video_id}-{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}.txt")  # Save transcript to a file
