@@ -40,16 +40,18 @@ def summarize_text(text):
         return None
 
 # Replace 'VIDEO_ID' with the ID of the YouTube video you want to extract the transcript from
-video_id = 'p02AIAoImzU'
+video_id = 'YsRaVK54GfM'
 transcript = get_transcript(video_id)
 
 if transcript:
     current_datetime = datetime.now()
-    save_to_file(transcript, f"transcript-{video_id}-{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}.txt")  # Save transcript to a file
+    formatted_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+    save_to_file(transcript, f"transcript-{formatted_time}-{video_id}.txt")  # Save transcript to a file
 
     summarized_text = summarize_text(transcript)
     if summarized_text:
         print("Summarized Text:")
         print(summarized_text)
         current_datetime = datetime.now()
-        save_to_file(summarized_text, f"response-{video_id}-{current_datetime.strftime('%Y-%m-%d %H:%M:%S')}.txt")  # Save transcript to a file
+        formatted_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+        save_to_file(transcript, f"transcript-{formatted_time}-{video_id}.txt")  # Save transcript to a file
