@@ -39,8 +39,16 @@ def summarize_text(text):
         print(f"Error: {str(e)}")
         return None
 
+# Compare Pricing
+# https://openai.com/pricing
+# Monitor Your Usage
+# https://platform.openai.com/usage
+# SET TO TRUE TO ENABLE SUMMARIZATION
+# THIS WILL REQUIRE A FREE OPENAI API KEY AND TOKENS PURCHASED
+USE_AI = False
+                                                              
 # Replace 'VIDEO_ID' with the ID of the YouTube video you want to extract the transcript from
-video_id = 'YsRaVK54GfM'
+video_id = '-0K6J03uJpQ'
 transcript = get_transcript(video_id)
 
 if transcript:
@@ -48,10 +56,12 @@ if transcript:
     formatted_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
     save_to_file(transcript, f"transcript-{formatted_time}-{video_id}.txt")  # Save transcript to a file
 
-    summarized_text = summarize_text(transcript)
-    if summarized_text:
-        print("Summarized Text:")
-        print(summarized_text)
-        current_datetime = datetime.now()
-        formatted_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
-        save_to_file(transcript, f"transcript-{formatted_time}-{video_id}.txt")  # Save transcript to a file
+    # CANT USE ALL YOUR TOKENS!
+    if USE_AI:
+        summarized_text = summarize_text(transcript)
+        if summarized_text:
+            print("Summarized Text:")
+            print(summarized_text)
+            current_datetime = datetime.now()
+            formatted_time = current_datetime.strftime('%Y-%m-%d %H:%M:%S')
+            save_to_file(summarized_text, f"response-{formatted_time}-{video_id}.txt")  # Save transcript to a file
